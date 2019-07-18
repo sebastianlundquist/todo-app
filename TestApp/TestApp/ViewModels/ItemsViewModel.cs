@@ -22,12 +22,7 @@ namespace TestApp.ViewModels
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(LoadItems);
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", (obj, item) =>
-            {
-                Items.Add(item as Item);
-            });
-
-            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "EditItem", (obj, item) =>
+            MessagingCenter.Subscribe<NewItemViewModel, Item>(this, "EditItem", (obj, item) =>
             {
                 LoadItems();
             });

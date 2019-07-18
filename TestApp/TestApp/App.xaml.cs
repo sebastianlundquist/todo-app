@@ -10,13 +10,24 @@ namespace TestApp
 {
     public partial class App : Application
     {
-        public static IDataStore<Item> Database => DependencyService.Get<IDataStore<Item>>() ?? new SqliteDataStore(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Items.db3"));
+        static IDataStore<Item> database;
+        public static IDataStore<Item> Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new SqliteDataStore(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Issues.db3"));
+                }
+                return database;
+            }
+        }
 
         public App()
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<SqliteDataStore>();
             MainPage = new MainPage();
         }
 
