@@ -14,12 +14,16 @@ namespace TestApp.ViewModels
     public class ItemsViewModel : BaseViewModel
     {
         public ObservableCollection<Item> Items { get; set; }
+        public Command AddItemCommand { get; set; }
         public Command LoadItemsCommand { get; set; }
 
         public ItemsViewModel()
         {
             Title = "TODO List";
             Items = new ObservableCollection<Item>();
+            AddItemCommand = new Command(async () => {
+                await App.Current.MainPage.Navigation.PushAsync(new NewItemPage());
+            });
             LoadItemsCommand = new Command(LoadItems);
 
             MessagingCenter.Subscribe<NewItemViewModel, Item>(this, "EditItem", (obj, item) =>
@@ -27,7 +31,7 @@ namespace TestApp.ViewModels
                 LoadItems();
             });
 
-            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", (obj, item) =>
+            MessagingCenter.Subscribe<ItemDetailViewModel, Item>(this, "DeleteItem", (obj, item) =>
             {
                 LoadItems();
             });

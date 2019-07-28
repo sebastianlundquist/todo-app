@@ -36,30 +36,5 @@ namespace TestApp.Views
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
         }
-
-        async void EditItem_Clicked(object sender, EventArgs e)
-        {
-            var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new NavigationPage(new NewItemPage(viewModel.Item));
-            page.Disappearing += (sender2, e2) =>
-            {
-                waitHandle.Set();
-            };
-            await Navigation.PushModalAsync(page, false);
-            await Task.Run(() => waitHandle.WaitOne());
-            MessagingCenter.Send(this, "EditItem", viewModel.Item);
-            await Navigation.PopAsync(false);
-        }
-
-        async void DeleteItem_Clicked(object sender, EventArgs e)
-        {
-            bool confirmed = await DisplayAlert("Confirm", $"Are you sure you want to delete item {viewModel.Item.Text}?", "OK", "Cancel");
-            if (confirmed)
-            {
-                App.Database.DeleteItem(viewModel.Item);
-                MessagingCenter.Send(this, "DeleteItem", viewModel.Item);
-                await Navigation.PopAsync();
-            }
-        }
     }
 }
