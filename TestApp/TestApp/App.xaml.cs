@@ -28,7 +28,7 @@ namespace TestApp
             InitializeComponent();
 
             DependencyService.Register<SqliteDataStore>();
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new ItemsPage());
         }
 
         protected override void OnStart()
