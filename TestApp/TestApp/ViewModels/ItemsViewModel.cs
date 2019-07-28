@@ -26,6 +26,11 @@ namespace TestApp.ViewModels
             {
                 LoadItems();
             });
+
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", (obj, item) =>
+            {
+                LoadItems();
+            });
         }
 
         void LoadItems()

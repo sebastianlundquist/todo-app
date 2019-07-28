@@ -39,7 +39,7 @@ namespace TestApp.ViewModels
         {
             Item.ReminderTime = ReminderDate + ReminderTime;
             App.Database.SaveItem(Item);
-            MessagingCenter.Send(this, "AddItem", Item);
+            MessagingCenter.Send(this, "EditItem", Item);
             await App.Current.MainPage.Navigation.PopModalAsync();
         }
 

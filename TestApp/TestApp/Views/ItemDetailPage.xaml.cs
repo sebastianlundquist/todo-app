@@ -57,7 +57,7 @@ namespace TestApp.Views
             if (confirmed)
             {
                 App.Database.DeleteItem(viewModel.Item);
-                MessagingCenter.Send(this, "EditItem", viewModel.Item);
+                MessagingCenter.Send(this, "DeleteItem", viewModel.Item);
                 await Navigation.PopAsync();
             }
         }
