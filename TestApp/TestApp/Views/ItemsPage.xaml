@@ -1,41 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestApp.Views.ItemsPage"
-             Title="{Binding Title}"
-             x:Name="BrowseItemsPage">
+<ContentPage
+    x:Class="TestApp.Views.ItemsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="BrowseItemsPage"
+    Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+        <ToolbarItem Command="{Binding AddItemCommand}" Text="Add" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <ListView x:Name="ItemsListView"
-                ItemsSource="{Binding Items}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                RefreshCommand="{Binding LoadItemsCommand}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
-                CachingStrategy="RecycleElement"
-                ItemSelected="OnItemSelected">
+        <ListView
+            x:Name="ItemsListView"
+            CachingStrategy="RecycleElement"
+            HasUnevenRows="true"
+            IsPullToRefreshEnabled="true"
+            IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+            ItemSelected="OnItemSelected"
+            ItemsSource="{Binding Items}"
+            RefreshCommand="{Binding LoadItemsCommand}"
+            VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Text}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                            <Label Text="{Binding Description}"
+                            <Label
+                                FontSize="Medium"
                                 LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                                Style="{DynamicResource ListItemTextStyle}"
+                                Text="{Binding Text}" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    FontSize="Small"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemDetailTextStyle}"
+                                    Text="{Binding Description}" />
+                                <Label
+                                    FontSize="Micro"
+                                    HorizontalOptions="EndAndExpand"
+                                    IsVisible="{Binding SetReminder}"
+                                    LineBreakMode="NoWrap"
+                                    Style="{DynamicResource ListItemTextStyle}"
+                                    Text="{Binding ReminderTime, StringFormat='{0:yyyy-MM-dd HH:mm}'}"
+                                    VerticalOptions="Center" />
+                                <Image
+                                    HorizontalOptions="End"
+                                    IsVisible="{Binding SetReminder}"
+                                    Source="ic_reminder" />
+                            </StackLayout>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-    
+
 </ContentPage>

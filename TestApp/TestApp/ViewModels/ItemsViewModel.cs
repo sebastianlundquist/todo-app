@@ -22,7 +22,7 @@ namespace TestApp.ViewModels
             Title = "TODO List";
             Items = new ObservableCollection<Item>();
             AddItemCommand = new Command(async () => {
-                await App.Current.MainPage.Navigation.PushAsync(new NewItemPage());
+                await App.Current.MainPage.Navigation.PushAsync(new NewItemPage(new Item()));
             });
             LoadItemsCommand = new Command(LoadItems);
 

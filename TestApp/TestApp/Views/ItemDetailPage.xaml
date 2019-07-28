@@ -1,19 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestApp.Views.ItemDetailPage"
-             Title="{Binding Title}">
+<ContentPage
+    x:Class="TestApp.Views.ItemDetailPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit" Command="{Binding EditItemCommand}" />
-        <ToolbarItem Text="Delete" Command="{Binding DeleteItemCommand}" />
+        <ToolbarItem Command="{Binding EditItemCommand}" Text="Edit" />
+        <ToolbarItem Command="{Binding DeleteItemCommand}" Text="Delete" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
+    <StackLayout Padding="15" Spacing="20">
+        <Label FontSize="Medium" Text="Text:" />
+        <Label FontSize="Small" Text="{Binding Item.Text}" />
+        <Label FontSize="Medium" Text="Description:" />
+        <Label FontSize="Small" Text="{Binding Item.Description}" />
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            IsVisible="{Binding ShowReminder}"
+            Orientation="Horizontal">
+            <Label Text="Reminder:" />
+            <Label Text="{Binding Item.ReminderTime, StringFormat='{0:MMMM dd yyyy HH:mm}'}" />
+        </StackLayout>
     </StackLayout>
-    
+
 </ContentPage>

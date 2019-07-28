@@ -11,8 +11,7 @@ namespace TestApp.Models
         public int Id { get; set; }
         public string Text { get; set; }
         public string Description { get; set; }
-        [Ignore]
-        public bool SetReminder { get; set; }
+        public string SetReminder { get; set; }
         public DateTime ReminderTime { get; set; }
     }
 }

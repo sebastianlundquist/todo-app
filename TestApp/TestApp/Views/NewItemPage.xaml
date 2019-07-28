@@ -1,29 +1,43 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TestApp.Views.NewItemPage"
-             Title="New Item">
-    
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TestApp.Views.NewItemPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="New Item">
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Cancel" Command="{Binding CancelCommand}" />
-        <ToolbarItem Text="Save" Command="{Binding SaveItemCommand}" />
+        <ToolbarItem Command="{Binding CancelCommand}" Text="Cancel" />
+        <ToolbarItem Command="{Binding SaveItemCommand}" Text="Save" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
-            <Label Text="Text" FontSize="Medium" />
-            <Entry Text="{Binding Item.Text}" FontSize="Small" Placeholder="Enter text" />
-            <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Item.Description}" FontSize="Small" Margin="0" Placeholder="Enter description" />
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="Set reminder" />
-                <Switch x:Name="setReminder" HorizontalOptions="EndAndExpand" IsToggled="{Binding SetReminder}" />
+        <StackLayout Padding="15" Spacing="20">
+            <Label FontSize="Medium" Text="Text" />
+            <Entry
+                FontSize="Small"
+                Placeholder="Enter text"
+                Text="{Binding Item.Text}" />
+            <Label FontSize="Medium" Text="Description" />
+            <Editor
+                Margin="0"
+                FontSize="Small"
+                Placeholder="Enter description"
+                Text="{Binding Item.Description}" />
+            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <Label FontSize="Medium" Text="Set reminder" />
+                <Switch
+                    x:Name="setReminder"
+                    HorizontalOptions="EndAndExpand"
+                    IsToggled="{Binding SetReminder}" />
             </StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" IsVisible="{Binding SetReminder}">
-                <DatePicker Date="{Binding ReminderDate}" HorizontalOptions="FillAndExpand"/>
-                <TimePicker Time="{Binding ReminderTime}" HorizontalOptions="FillAndExpand"/>
+            <StackLayout
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding SetReminder}"
+                Orientation="Horizontal">
+                <DatePicker Date="{Binding ReminderDate}" HorizontalOptions="FillAndExpand" />
+                <TimePicker HorizontalOptions="FillAndExpand" Time="{Binding ReminderTime}" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
-    
+
 </ContentPage>

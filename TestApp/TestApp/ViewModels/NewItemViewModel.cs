@@ -30,7 +30,21 @@ namespace TestApp.ViewModels
             Item = item;
             ReminderDate = DateTime.Today;
             ReminderTime = DateTime.Now.TimeOfDay;
-            SetReminder = false;
+
+            string reminder = item?.SetReminder;
+            if (reminder == null)
+            {
+                SetReminder = false;
+            }
+            else if (reminder == "true")
+            {
+                SetReminder = true;
+            }
+            else
+            {
+                SetReminder = false;
+            }
+
             SaveItemCommand = new Command(SaveItem);
             CancelCommand = new Command(Cancel);
         }
@@ -38,6 +52,7 @@ namespace TestApp.ViewModels
         public async void SaveItem()
         {
             Item.ReminderTime = ReminderDate + ReminderTime;
+            Item.SetReminder = SetReminder ? "true" : "false";
             App.Database.SaveItem(Item);
             MessagingCenter.Send(this, "EditItem", Item);
             await App.Current.MainPage.Navigation.PopAsync();

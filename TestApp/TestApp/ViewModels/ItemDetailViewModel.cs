@@ -10,12 +10,27 @@ namespace TestApp.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         public Item Item { get; set; }
+        public bool ShowReminder { get; set; }
         public Command EditItemCommand { get; set; }
         public Command DeleteItemCommand { get; set; }
         public ItemDetailViewModel(Item item = null)
         {
             Title = item?.Text;
             Item = item;
+
+            string reminder = item?.SetReminder;
+            if (reminder == null)
+            {
+                ShowReminder = false;
+            }
+            else if (reminder == "true")
+            {
+                ShowReminder = true;
+            }
+            else
+            {
+                ShowReminder = false;
+            }
 
             EditItemCommand = new Command(EditItem);
             DeleteItemCommand = new Command(DeleteItem);
