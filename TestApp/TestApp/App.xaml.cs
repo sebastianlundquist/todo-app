@@ -6,6 +6,10 @@ using TestApp.Views;
 using System.IO;
 using TestApp.Models;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
+
 namespace TestApp
 {
     public partial class App : Application
@@ -33,7 +37,8 @@ namespace TestApp
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+            AppCenter.Start("android=7b403b13-6690-4b6d-ba7e-1a45575b04de;",
+                  typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()
