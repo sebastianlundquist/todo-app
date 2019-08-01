@@ -53,10 +53,17 @@ namespace TestApp.ViewModels
         public async void SaveItem()
         {
             Item.ReminderTime = ReminderDate + ReminderTime;
-            Item.SetReminder = SetReminder ? "true" : "false";
-
-            CrossLocalNotifications.Current.Show(Item.Text, Item.Description, 101, Item.ReminderTime);
-
+            App.Database.SaveItem(Item);
+            if (SetReminder)
+            {
+                Item.SetReminder = "true";
+                CrossLocalNotifications.Current.Show(Item.Text, Item.Description, Item.Id, Item.ReminderTime);
+            }
+            else
+            {
+                Item.SetReminder = "false";
+                CrossLocalNotifications.Current.Cancel(Item.Id);
+            }
             App.Database.SaveItem(Item);
             MessagingCenter.Send(this, "EditItem", Item);
             await App.Current.MainPage.Navigation.PopAsync();
