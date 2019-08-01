@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.LocalNotifications;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using TestApp.Models;
@@ -53,6 +54,9 @@ namespace TestApp.ViewModels
         {
             Item.ReminderTime = ReminderDate + ReminderTime;
             Item.SetReminder = SetReminder ? "true" : "false";
+
+            CrossLocalNotifications.Current.Show(Item.Text, Item.Description, 101, Item.ReminderTime);
+
             App.Database.SaveItem(Item);
             MessagingCenter.Send(this, "EditItem", Item);
             await App.Current.MainPage.Navigation.PopAsync();
