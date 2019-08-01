@@ -39,7 +39,7 @@ namespace TestApp.ViewModels
         async void EditItem()
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new NewItemPage(Item);
+            var page = new NewItemPage(Item, $"Edit {Item.Text}");
             page.Disappearing += (sender, e) =>
             {
                 waitHandle.Set();

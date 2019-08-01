@@ -15,18 +15,12 @@ namespace TestApp.Views
     public partial class NewItemPage : ContentPage
     {
         ItemDetailViewModel viewModel;
-        public NewItemPage()
-        {
-            InitializeComponent();
-            viewModel = new NewItemViewModel(new Item());
-            BindingContext = viewModel;
-        }
-
-        public NewItemPage(Item item)
+        public NewItemPage(Item item, string title)
         {
             InitializeComponent();
             viewModel = new NewItemViewModel(item);
             BindingContext = viewModel;
+            Title = title;
         }
     }
 }
