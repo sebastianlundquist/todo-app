@@ -13,7 +13,22 @@ namespace TestApp.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
+        private bool noItemsExist;
+        public bool NoItemsExist
+        {
+            get
+            {
+                return noItemsExist;
+            }
+            set
+            {
+                noItemsExist = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Item> Items { get; set; }
+        
         public Command AddItemCommand { get; set; }
         public Command LoadItemsCommand { get; set; }
 
@@ -49,9 +64,11 @@ namespace TestApp.ViewModels
                 Items.Clear();
                 var items = App.Database.GetItems();
                 foreach (var item in items)
-                {
                     Items.Add(item);
-                }
+                if (items.Count() == 0)
+                    NoItemsExist = true;
+                else
+                    NoItemsExist = false;
             }
             catch (Exception ex)
             {

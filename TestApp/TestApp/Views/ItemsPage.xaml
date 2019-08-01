@@ -11,6 +11,11 @@
     </ContentPage.ToolbarItems>
 
     <StackLayout>
+        <Label
+            Margin="30"
+            HorizontalOptions="Center"
+            IsVisible="{Binding NoItemsExist}"
+            Text="You have nothing to do." />
         <ListView
             x:Name="ItemsListView"
             CachingStrategy="RecycleElement"
