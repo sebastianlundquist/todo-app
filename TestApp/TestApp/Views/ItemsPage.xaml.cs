@@ -24,7 +24,7 @@ namespace TestApp.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new ItemsViewModel(App.Database);
         }
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

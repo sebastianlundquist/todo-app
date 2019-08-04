@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using TestApp.Models;
 using TestApp.Views;
 using System.Linq;
+using TestApp.Services;
 
 namespace TestApp.ViewModels
 {
@@ -32,8 +33,10 @@ namespace TestApp.ViewModels
         public Command AddItemCommand { get; set; }
         public Command LoadItemsCommand { get; set; }
 
-        public ItemsViewModel()
+        private readonly IDataStore<Item> db;
+        public ItemsViewModel(IDataStore<Item> database)
         {
+            db = database ?? throw new ArgumentNullException(nameof(database));
             Title = "TODO List";
             Items = new ObservableCollection<Item>();
             AddItemCommand = new Command(async () => {
@@ -52,7 +55,7 @@ namespace TestApp.ViewModels
             });
         }
 
-        void LoadItems()
+        public void LoadItems()
         {
             if (IsBusy)
                 return;
@@ -62,7 +65,7 @@ namespace TestApp.ViewModels
             try
             {
                 Items.Clear();
-                var items = App.Database.GetItems();
+                var items = db.GetItems();
                 foreach (var item in items)
                     Items.Add(item);
                 if (items.Count() == 0)
