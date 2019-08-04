@@ -54,7 +54,6 @@ namespace TestApp.UITest
             app.WaitForElement(titleEntry);
             app.ClearText(titleEntry);
             app.EnterText(titleEntry, title);
-            app.DismissKeyboard();
             app.Screenshot("Entered title");
             return this;
         }
@@ -64,7 +63,6 @@ namespace TestApp.UITest
             app.WaitForElement(descriptionEditor);
             app.ClearText(descriptionEditor);
             app.EnterText(descriptionEditor, description);
-            app.DismissKeyboard();
             app.Screenshot("Entered description");
             return this;
         }
