@@ -9,6 +9,7 @@ namespace TestApp.Services
         int SaveItem(T item);
         int UpdateItem(T item);
         int DeleteItem(T item);
+        int DeleteAllItems();
         T GetItem(int id);
         IEnumerable<T> GetItems();
     }
