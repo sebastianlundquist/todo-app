@@ -12,16 +12,6 @@ namespace TestApp.UITest
         public Tests(Platform platform) : base(platform) { }
 
         [Test]
-        public void Repl()
-        {
-            if (TestEnvironment.IsTestCloud)
-            {
-                Assert.Ignore("Local only");
-            }
-            app.Repl();
-        }
-
-        [Test]
         public void AddingItemUpdatesPage()
         {
             new ItemsPage()
