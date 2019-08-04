@@ -38,6 +38,11 @@ namespace TestApp.Services
             return database.Delete(item);
         }
 
+        public int DeleteAllItems()
+        {
+            return database.DeleteAll<Item>();
+        }
+
         public Item GetItem(int id)
         {
             return database.Table<Item>().Where(i => i.Id == id).FirstOrDefault();
