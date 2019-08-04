@@ -27,7 +27,7 @@ namespace TestApp.ViewModels
         public Command CancelCommand { get; set; }
         public NewItemViewModel(Item item = null)
         {
-            Title = item?.Title;
+            Title = item?.Text;
             Item = item;
             ReminderDate = DateTime.Today;
             ReminderTime = DateTime.Now.TimeOfDay;
@@ -57,7 +57,7 @@ namespace TestApp.ViewModels
             if (SetReminder)
             {
                 Item.SetReminder = "true";
-                CrossLocalNotifications.Current.Show(Item.Title, Item.Description, Item.Id, Item.ReminderTime);
+                CrossLocalNotifications.Current.Show(Item.Text, Item.Description, Item.Id, Item.ReminderTime);
             }
             else
             {

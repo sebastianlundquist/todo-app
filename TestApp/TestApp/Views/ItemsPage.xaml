@@ -7,10 +7,7 @@
     Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            AutomationId="addButton"
-            Command="{Binding AddItemCommand}"
-            Text="Add" />
+        <ToolbarItem Command="{Binding AddItemCommand}" Text="Add" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
@@ -21,7 +18,6 @@
             Text="You have nothing to do." />
         <ListView
             x:Name="ItemsListView"
-            AutomationId="itemListView"
             CachingStrategy="RecycleElement"
             HasUnevenRows="true"
             IsPullToRefreshEnabled="true"
@@ -33,16 +29,14 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="10" AutomationId="itemContainer">
+                        <StackLayout Padding="10">
                             <Label
-                                AutomationId="titleLabel"
                                 FontSize="Medium"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemTextStyle}"
-                                Text="{Binding Title}" />
+                                Text="{Binding Text}" />
                             <StackLayout Orientation="Horizontal">
                                 <Label
-                                    AutomationId="descriptionLabel"
                                     FontSize="Small"
                                     LineBreakMode="NoWrap"
                                     Style="{DynamicResource ListItemDetailTextStyle}"

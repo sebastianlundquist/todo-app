@@ -29,7 +29,7 @@ namespace TestApp.Views
 
             var item = new Item
             {
-                Title = "Item 1",
+                Text = "Item 1",
                 Description = "This is an item description."
             };
 

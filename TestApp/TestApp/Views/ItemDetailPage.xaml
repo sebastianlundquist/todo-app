@@ -6,22 +6,13 @@
     Title="{Binding Title}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            AutomationId="editButton"
-            Command="{Binding EditItemCommand}"
-            Text="Edit" />
-        <ToolbarItem
-            AutomationId="deleteButton"
-            Command="{Binding DeleteItemCommand}"
-            Text="Delete" />
+        <ToolbarItem Command="{Binding EditItemCommand}" Text="Edit" />
+        <ToolbarItem Command="{Binding DeleteItemCommand}" Text="Delete" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout
-        Padding="15"
-        AutomationId="detailsContainer"
-        Spacing="20">
-        <Label FontSize="Medium" Text="Title:" />
-        <Label FontSize="Small" Text="{Binding Item.Title}" />
+    <StackLayout Padding="15" Spacing="20">
+        <Label FontSize="Medium" Text="Text:" />
+        <Label FontSize="Small" Text="{Binding Item.Text}" />
         <Label FontSize="Medium" Text="Description:" />
         <Label FontSize="Small" Text="{Binding Item.Description}" />
         <StackLayout

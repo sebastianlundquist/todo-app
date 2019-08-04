@@ -15,7 +15,7 @@ namespace TestApp.ViewModels
         public Command DeleteItemCommand { get; set; }
         public ItemDetailViewModel(Item item = null)
         {
-            Title = item?.Title;
+            Title = item?.Text;
             Item = item;
 
             string reminder = item?.SetReminder;
@@ -39,7 +39,7 @@ namespace TestApp.ViewModels
         async void EditItem()
         {
             var waitHandle = new EventWaitHandle(false, EventResetMode.AutoReset);
-            var page = new NewItemPage(Item, $"Edit {Item.Title}");
+            var page = new NewItemPage(Item, $"Edit {Item.Text}");
             page.Disappearing += (sender, e) =>
             {
                 waitHandle.Set();
@@ -52,7 +52,7 @@ namespace TestApp.ViewModels
 
         async void DeleteItem()
         {
-            bool confirmed = await App.Current.MainPage.DisplayAlert("Confirm", $"Are you sure you want to delete item {Item.Title}?", "OK", "Cancel");
+            bool confirmed = await App.Current.MainPage.DisplayAlert("Confirm", $"Are you sure you want to delete item {Item.Text}?", "OK", "Cancel");
             if (confirmed)
             {
                 App.Database.DeleteItem(Item);
