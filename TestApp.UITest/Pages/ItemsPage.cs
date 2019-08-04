@@ -51,8 +51,8 @@ namespace TestApp.UITest
 
         public void CheckItem(int index, string expectedTitle, string expectedDescription)
         {
-            var title = app.WaitForElement(listItemTitle(index));
-            var description = app.WaitForElement(listItemDescription(index));
+            var title = app.WaitForElement(listItemTitle(index))[0].Text;
+            var description = app.WaitForElement(listItemDescription(index))[0].Text;
             Assert.AreEqual(expectedTitle, title, $"Unexpected item title");
             Assert.AreEqual(expectedDescription, description, $"Unexpected item description");
         }

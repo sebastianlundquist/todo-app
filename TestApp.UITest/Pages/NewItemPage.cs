@@ -62,7 +62,7 @@ namespace TestApp.UITest
         public NewItemPage EnterDescription(string description)
         {
             app.WaitForElement(descriptionEditor);
-            app.ClearText(titleEntry);
+            app.ClearText(descriptionEditor);
             app.EnterText(descriptionEditor, description);
             app.DismissKeyboard();
             app.Screenshot("Entered description");
