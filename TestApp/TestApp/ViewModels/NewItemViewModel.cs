@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TestApp.Models;
+using TestApp.Services;
 using Xamarin.Forms;
 
 namespace TestApp.ViewModels
 {
-    public class NewItemViewModel : ItemDetailViewModel
+    public class NewItemViewModel : BaseViewModel
     {
+        public Item Item { get; set; }
         public DateTime ReminderDate { get; set; }
         public TimeSpan ReminderTime { get; set; }
         private bool setReminder;
@@ -22,11 +24,14 @@ namespace TestApp.ViewModels
                 OnPropertyChanged();
             }
         }
+        private readonly IDataStore<Item> Database;
 
         public Command SaveItemCommand { get; set; }
         public Command CancelCommand { get; set; }
-        public NewItemViewModel(Item item = null)
+        public NewItemViewModel(IDataStore<Item> database, Item item = null)
         {
+            Database = database;
+
             Title = item?.Title;
             Item = item;
             ReminderDate = DateTime.Today;

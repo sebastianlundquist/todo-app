@@ -14,11 +14,11 @@ namespace TestApp.Views
     [DesignTimeVisible(false)]
     public partial class NewItemPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        NewItemViewModel viewModel;
         public NewItemPage(Item item, string title)
         {
             InitializeComponent();
-            viewModel = new NewItemViewModel(item);
+            viewModel = new NewItemViewModel(App.Database, item);
             BindingContext = viewModel;
             Title = title;
         }

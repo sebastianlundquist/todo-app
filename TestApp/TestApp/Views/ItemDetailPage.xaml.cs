@@ -33,7 +33,7 @@ namespace TestApp.Views
                 Description = "This is an item description."
             };
 
-            viewModel = new ItemDetailViewModel(item);
+            viewModel = new ItemDetailViewModel(App.Database, item);
             BindingContext = viewModel;
         }
     }

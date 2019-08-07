@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using TestApp.Models;
+using TestApp.Services;
 using TestApp.Views;
 using Xamarin.Forms;
 
@@ -13,8 +14,11 @@ namespace TestApp.ViewModels
         public bool ShowReminder { get; set; }
         public Command EditItemCommand { get; set; }
         public Command DeleteItemCommand { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public IDataStore<Item> Database;
+        public ItemDetailViewModel(IDataStore<Item> database, Item item = null)
         {
+            Database = database;
+
             Title = item?.Title;
             Item = item;
 
@@ -50,12 +54,12 @@ namespace TestApp.ViewModels
             await App.Current.MainPage.Navigation.PopAsync(false);
         }
 
-        async void DeleteItem()
+        public async void DeleteItem()
         {
             bool confirmed = await App.Current.MainPage.DisplayAlert("Confirm", $"Are you sure you want to delete item {Item.Title}?", "OK", "Cancel");
             if (confirmed)
             {
-                App.Database.DeleteItem(Item);
+                Database.DeleteItem(Item);
                 MessagingCenter.Send(this, "DeleteItem", Item);
                 await App.Current.MainPage.Navigation.PopAsync();
             }
